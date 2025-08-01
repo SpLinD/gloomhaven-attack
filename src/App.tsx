@@ -65,9 +65,8 @@ function App() {
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <span>cards left: {cards.length}</span>
+        <div className="app-container">
+            <div className="card-stacks">
                 <div className="card-stack">
                     {cards.map((_, i) => (
                         <img
@@ -83,6 +82,7 @@ function App() {
                         />
                     ))}
                 </div>
+
                 <div className="card-stack">
                     {[...drawnCards].reverse().map((card, i) => (
                         <img
@@ -98,6 +98,8 @@ function App() {
                         />
                     ))}
                 </div>
+            </div>
+            <div className="button-section">
                 <button onClick={needsReshuffle ? shuffleDeck : drawCard}>
                     {needsReshuffle ? 'Shuffle Deck' : 'Draw Card'}
                 </button>
@@ -119,7 +121,7 @@ function App() {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
