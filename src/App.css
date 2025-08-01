@@ -1,0 +1,40 @@
+.card {
+  width: calc(100vw - 4em);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.draw-button-container {
+  width: calc(100vw - 4em);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+
+.add-button-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+
+.card-stack {
+  position: relative;
+  width: calc(100vw - 4em);
+  height: 250px;
+}
+.card-image {
+  position: absolute;
+  width: calc(100vw - 4em);
+  height: auto;
+  top: 0;
+  left: 0;
+  transform: translate(var(--x), var(--y));
+  z-index: var(--z);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  object-fit: contain;
+}
+
