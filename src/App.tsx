@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react'
+import {useCallback, useRef, useState} from 'react'
 import './App.css'
 import {blessingCard, type Card, curseCard, defaultCards} from "./helpers/cards.ts";
 import shuffleCards from "./helpers/shuffleCards.ts";
@@ -8,7 +8,7 @@ function App() {
     const [cards, setCards] = useState(shuffleCards(defaultCards));
     const [drawnCards, setDrawnCards] = useState<Card[]>([])
     const [needsReshuffle, setNeedsReshuffle] = useState(false)
-
+    const dialogRef = useRef<HTMLDialogElement | null>(null);
     const shuffleDeck = useCallback(() => {
         setCards(shuffleCards([...cards, ...drawnCards.filter(card => card.putInDeckAfterDraw)]));
         setDrawnCards([]);
@@ -67,6 +67,7 @@ function App() {
     return (
         <div className="app-container">
             <div className="card-stacks">
+                Cards: {cards.length}
                 <div className="card-stack">
                     {cards.map((_, i) => (
                         <img
@@ -99,6 +100,7 @@ function App() {
                     ))}
                 </div>
             </div>
+
             <div className="button-section">
                 <button onClick={needsReshuffle ? shuffleDeck : drawCard}>
                     {needsReshuffle ? 'Shuffle Deck' : 'Draw Card'}
@@ -120,7 +122,13 @@ function App() {
                         Add blessing
                     </button>
                 </div>
+                {/*<button onClick={() => dialogRef.current?.showModal()} disabled={drawnCards.length > 0}>*/}
+                {/*    Edit Deck*/}
+                {/*</button>*/}
             </div>
+            <dialog ref={dialogRef}>
+                <button onClick={() => dialogRef.current?.close()}>Close</button>
+            </dialog>
         </div>
     )
 }
